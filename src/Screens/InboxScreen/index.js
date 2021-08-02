@@ -22,6 +22,7 @@ class InboxScreen extends Component {
       const jsonValue = await AsyncStorage.getItem('inbox')
       if(jsonValue != null){
         const data = JSON.parse(jsonValue)
+        console.log(data)
         const dataSort = data.sort((a, b)=>{
           // Turn your strings into dates, and then subtract them
           // to get a value that is either negative, positive, or zero.

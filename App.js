@@ -6,7 +6,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import messaging from '@react-native-firebase/messaging';
 import FlashMessage, { showMessage } from "react-native-flash-message";
 import { Provider } from 'react-redux';
-import Store from './src/redux/store';
+import { Store, Persistor } from './src/redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 class App extends Component {
   constructor(props) {
@@ -54,7 +55,9 @@ class App extends Component {
   render() {
     return (
       <Provider store={Store}>
-        <Navigation/>
+        <PersistGate loading={null} persistor={Persistor} >
+          <Navigation/>
+        </PersistGate>
         <FlashMessage position='top' />
       </Provider>
     )

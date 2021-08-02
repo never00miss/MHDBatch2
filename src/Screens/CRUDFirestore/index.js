@@ -4,22 +4,18 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  TouchableOpacity,
   View,
 } from 'react-native';
 import {colors} from '../../styles';
 import firestore from '@react-native-firebase/firestore';
+import CButton from '../../component/CButton';
 
 class CRUDFirestore extends Component {
   constructor(){
     super()
     this.state = {
-      data : {
-        nama: 'default name',
-        uid: 'dafault uid'
-      },
       listRealtime: [],
-      listOneTime: [],
+      // listOneTime: [],
       inputNama: '',
       inputAlamat: ''
     }
@@ -28,12 +24,12 @@ class CRUDFirestore extends Component {
   async componentDidMount(){
     
     //One Time Read
-    const tampungan = await firestore().collection('Users').get()
-    this.setState({
-      listOneTime: tampungan.docs.map(result=>{
-        return result.data()
-      })
-    })
+    // const tampungan = await firestore().collection('Users').get()
+    // this.setState({
+    //   listOneTime: tampungan.docs.map(result=>{
+    //     return result.data()
+    //   })
+    // })
 
     //Realtime Changes
     firestore()
@@ -57,17 +53,15 @@ class CRUDFirestore extends Component {
   }
 
   render() {
-    const { data, inputAlamat, inputNama, listOneTime, listRealtime } = this.state
+    const { inputAlamat, inputNama, listRealtime } = this.state
     return (
       <View style={styles.container}>
-        <View style={{paddingVertical: 30, width: '100%', alignItems: 'center'}}>
+        <View style={{paddingVertical: 10, width: '100%', alignItems: 'center'}}>
           <TextInput placeholder="Nama" style={styles.input} onChangeText={(e)=>this.setState({inputNama: e})} value={inputNama} />
           <TextInput placeholder="Alamat" style={styles.input} onChangeText={(e)=>this.setState({inputAlamat: e})} value={inputAlamat} />
-          <TouchableOpacity style={styles.button} onPress={this.submit} >
-            <Text style={{fontSize: 16, color: 'white', fontWeight: 'bold'}}>SUBMIT</Text>
-          </TouchableOpacity>
+          <CButton title="SUBMIT" onPress={this.submit} />
         </View>
-        <View style={{width: '100%', alignItems: 'center', flex:1}}>
+        <View style={{width: '100%', flex:1}}>
           <ScrollView showsVerticalScrollIndicator={false}>
             {listRealtime.map((value, index)=>{
               return(
@@ -111,7 +105,7 @@ const styles = StyleSheet.create({
     elevation: 8,
   },
   list: {
-    width: '70%',
+    width: '90%',
     backgroundColor: 'white',
     borderRadius: 8,
     elevation: 8,
@@ -119,6 +113,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     justifyContent: 'space-between',
-    marginTop: 10,
+    marginVertical: 5,
+    alignSelf: 'center'
   }
 });

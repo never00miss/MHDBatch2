@@ -22,15 +22,13 @@ class CRUDBasic extends Component {
   getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem('data')
-      const data = jsonValue != null ? JSON.parse(jsonValue) : null;
       this.setState({
-        data: data
+        data: jsonValue != null ? JSON.parse(jsonValue) : []
       })
     } catch(e) {
       // error reading value
     }
   }
-
 
   storeData = async () => {
     const { id, nama, alamat, data } = this.state
@@ -49,52 +47,52 @@ class CRUDBasic extends Component {
     }
   }
 
-  tambah = () => {
-    const {id, nama, alamat} = this.state
-    this.setState((prev)=>({
-      data: [...prev.data, {id, nama, alamat}],
-      id: '',
-      nama: '',
-      alamat: ''
-    }))
-  }
+  // tambah = () => {
+  //   const {id, nama, alamat} = this.state
+  //   this.setState((prev)=>({
+  //     data: [...prev.data, {id, nama, alamat}],
+  //     id: '',
+  //     nama: '',
+  //     alamat: ''
+  //   }))
+  // }
 
-  delete = (id) => {
-    let tampungan = this.state.data.filter(value => {
-      return value.id != id
-    })
-    this.setState({
-      data: tampungan
-    })
-  }
+  // delete = (id) => {
+  //   let tampungan = this.state.data.filter(value => {
+  //     return value.id != id
+  //   })
+  //   this.setState({
+  //     data: tampungan
+  //   })
+  // }
 
-  edit = (params) => {
-    this.setState({
-      id: params.id,
-      nama: params.nama,
-      alamat: params.alamat,
-      onEdit: true
-    })
-  }
+  // edit = (params) => {
+  //   this.setState({
+  //     id: params.id,
+  //     nama: params.nama,
+  //     alamat: params.alamat,
+  //     onEdit: true
+  //   })
+  // }
 
-  update = () => {
-    const {id, nama, alamat} = this.state
-    const tampungan = this.state.data
-    tampungan.filter(value => {
-      if(value.id == id){
-        value.id = id,
-        value.nama = nama,
-        value.alamat = alamat
-      }
-    })
-    this.setState({
-      data: tampungan,
-      id: '',
-      nama: '',
-      alamat: '',
-      onEdit: false
-    })
-  }
+  // update = () => {
+  //   const {id, nama, alamat} = this.state
+  //   const tampungan = this.state.data
+  //   tampungan.filter(value => {
+  //     if(value.id == id){
+  //       value.id = id,
+  //       value.nama = nama,
+  //       value.alamat = alamat
+  //     }
+  //   })
+  //   this.setState({
+  //     data: tampungan,
+  //     id: '',
+  //     nama: '',
+  //     alamat: '',
+  //     onEdit: false
+  //   })
+  // }
 
   render() {
     const {id, nama, alamat, onEdit} = this.state

@@ -1,37 +1,41 @@
 import * as React from 'react';
-import {View, Text, Button} from 'react-native';
-import firestore from '@react-native-firebase/firestore';
-
+import {View, StyleSheet} from 'react-native';
+import CButton from '../../component/CButton';
 export default class HomeScreen extends React.Component {
+  constructor(){
+    super()
+    this.state={
+      content: [
+        {name: 'CRUD using AsyncStorage', route: 'CRUD'}, 
+        {name: 'CRUD using Firestore', route: 'CRUDFirestore'}, 
+        {name: 'Inbox', route: 'Inbox'}, 
+        {name: 'CRUD using Redux', route: 'CRUDRedux'}
+      ]
+    }
+  }
   render() {
+    const { content } = this.state
+    const { navigation } = this.props
     return (
-      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-        {/* <Text style={{fontWeight: 'bold'}}>ONE TIME</Text>
-        {this.state.listOneTime.map((value, index)=>{
+      <View style={styles.container}>
+        {content.map((value, index)=>{
           return(
-            <Text key={index}>{value.nama}</Text>
+            <CButton 
+              title={value.name.toUpperCase()} 
+              key={index} 
+              onPress={()=>navigation.navigate(value.route)} 
+            />
           )
         })}
-
-        <Text style={{fontWeight: 'bold', marginTop: 10}}>REALTIME</Text>
-        {this.state.listRealtime.map((value, index)=>{
-          return(
-            <Text key={index}>{value.nama}</Text>
-          )
-        })} */}
-        <Button 
-          title='CRUD BASIC'
-          onPress={() => this.props.navigation.navigate('CRUD')}
-        />
-        <Button
-          title="INBOX"
-          onPress={() => this.props.navigation.navigate('Inbox')}
-        />
-        <Button
-          title="FIRESTORE"
-          onPress={() => this.props.navigation.navigate('CRUDFirestore')}
-        />
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1, 
+    alignItems: 'center', 
+    justifyContent: 'center'
+  }
+})

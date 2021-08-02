@@ -4,7 +4,7 @@ import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 class CButton extends Component {
     render() {
         return (
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={this.props.onPress}>
                 <Text style={{color: 'white', textAlign: 'center'}}>{this.props.title}</Text>
             </TouchableOpacity>
         )

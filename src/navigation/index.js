@@ -9,6 +9,7 @@ import CRUDFirestore from '../Screens/CRUDFirestore';
 import InboxScreen from '../Screens/InboxScreen';
 import CRUDBasic from '../Screens/CRUDBasic';
 import CRUDRedux from '../Screens/CRUDRedux';
+import LoginScreen from '../Screens/LoginScreen';
 
 const Stack = createStackNavigator();
 
@@ -16,7 +17,7 @@ class Navigation extends React.Component{
   render(){
     return (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
+        <Stack.Navigator initialRouteName="Splash">
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="CRUD" component={CRUDBasic} />
           <Stack.Screen name="Movie" component={MovieList} />
@@ -24,6 +25,7 @@ class Navigation extends React.Component{
           <Stack.Screen name="CRUDFirestore" component={CRUDFirestore} />
           <Stack.Screen name="Inbox" component={InboxScreen} />
           <Stack.Screen name="CRUDRedux" component={CRUDRedux} />
+          <Stack.Screen name="Login" component={LoginScreen} options={{headerShown: false}} />
         </Stack.Navigator>
       </NavigationContainer>
     )
