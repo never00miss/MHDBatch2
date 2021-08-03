@@ -1,0 +1,76 @@
+{
+  "project_info": {
+    "project_number": "695747390785",
+    "project_id": "salt-firebase-training-59916",
+    "storage_bucket": "salt-firebase-training-59916.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:695747390785:android:7a7e51c7f97605f17905c0",
+        "android_client_info": {
+          "package_name": "com.mhdbatch2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "695747390785-7qt4rpoclf1l7c6orgors54i4vq4111i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAy1uQhgKE1LwVSVNvlqfmZW_0ytJYpwS0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "695747390785-7qt4rpoclf1l7c6orgors54i4vq4111i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:695747390785:android:cfa771851a2859d17905c0",
+        "android_client_info": {
+          "package_name": "com.saltacademy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "695747390785-7oa85brc0m0bogmt9jtieu7ra3fkf2m0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.saltacademy",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "695747390785-7qt4rpoclf1l7c6orgors54i4vq4111i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAy1uQhgKE1LwVSVNvlqfmZW_0ytJYpwS0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "695747390785-7qt4rpoclf1l7c6orgors54i4vq4111i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

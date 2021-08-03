@@ -1,40 +1,41 @@
 import * as React from 'react';
-import { View, Text, Button } from 'react-native';
-
+import {View, StyleSheet} from 'react-native';
+import CButton from '../../component/CButton';
 export default class HomeScreen extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            name: "allan",
-            age: 29
-        }
+  constructor(){
+    super()
+    this.state={
+      content: [
+        {name: 'CRUD using AsyncStorage', route: 'CRUD'}, 
+        {name: 'CRUD using Firestore', route: 'CRUDFirestore'}, 
+        {name: 'Inbox', route: 'Inbox'}, 
+        {name: 'CRUD using Redux', route: 'CRUDRedux'}
+      ]
     }
-
-    componentDidMount() {
-        const dataAdditional = {
-            alamat: "gempol",
-            name: "dhino",
-            age: 30,
-        }
-
-        this.setState({
-            ...dataAdditional,
-            name: "test"
-        });
-    }
-
-    render() {
-        const { name } = this.state;
-        return (
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text>Home Screen</Text>
-                <Text>{name}</Text>
-                <Button
-                    title="Go to Details"
-                    onPress={() => this.props.navigation.navigate('Details')}
-                />
-            </View>
-        );
-    }
+  }
+  render() {
+    const { content } = this.state
+    const { navigation } = this.props
+    return (
+      <View style={styles.container}>
+        {content.map((value, index)=>{
+          return(
+            <CButton 
+              title={value.name.toUpperCase()} 
+              key={index} 
+              onPress={()=>navigation.navigate(value.route)} 
+            />
+          )
+        })}
+      </View>
+    );
+  }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1, 
+    alignItems: 'center', 
+    justifyContent: 'center'
+  }
+})
