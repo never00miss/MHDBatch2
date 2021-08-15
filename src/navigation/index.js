@@ -10,6 +10,9 @@ import InboxScreen from '../Screens/InboxScreen';
 import CRUDBasic from '../Screens/CRUDBasic';
 import CRUDRedux from '../Screens/CRUDRedux';
 import LoginScreen from '../Screens/LoginScreen';
+import CRUDLocal from '../Screens/CRUDLocal';
+import ListChat from '../Screens/ListChat';
+import ChatScreen from '../Screens/ChatScreen';
 
 const Stack = createStackNavigator();
 
@@ -26,6 +29,9 @@ class Navigation extends React.Component{
           <Stack.Screen name="Inbox" component={InboxScreen} />
           <Stack.Screen name="CRUDRedux" component={CRUDRedux} />
           <Stack.Screen name="Login" component={LoginScreen} options={{headerShown: false}} />
+          <Stack.Screen name="CRUDLocal" component={CRUDLocal} />
+          <Stack.Screen name="ListChat" component={ListChat} />
+          <Stack.Screen name="Chat" component={ChatScreen} options={{headerShown: false}} />
         </Stack.Navigator>
       </NavigationContainer>
     )

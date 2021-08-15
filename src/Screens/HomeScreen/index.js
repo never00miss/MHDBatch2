@@ -9,7 +9,9 @@ export default class HomeScreen extends React.Component {
         {name: 'CRUD using AsyncStorage', route: 'CRUD'}, 
         {name: 'CRUD using Firestore', route: 'CRUDFirestore'}, 
         {name: 'Inbox', route: 'Inbox'}, 
-        {name: 'CRUD using Redux', route: 'CRUDRedux'}
+        {name: 'CRUD using Redux', route: 'CRUDRedux'},
+        {name: 'CRUD State Local', route: 'CRUDLocal'},
+        {name: 'Chat', route: 'ListChat'}
       ]
     }
   }
