@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Auth from '@react-native-firebase/auth';
 import Firestore from '@react-native-firebase/firestore';
+import CText from '../../component/CText';
 
 class ListChat extends Component {
   constructor(){
@@ -29,7 +30,7 @@ class ListChat extends Component {
         {Users.map((value, index)=>{
           return(
             <TouchableOpacity key={index} onPress={()=>this.props.navigation.navigate('Chat', value)} style={styles.list}>
-              <Text>{value.nama.toUpperCase()}</Text>
+              <CText style={{color:'black'}}>{value.nama.toUpperCase()}</CText>
             </TouchableOpacity>
           )
         })}

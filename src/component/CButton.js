@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { StyleSheet, TouchableOpacity } from 'react-native'
+import CText from './CText'
 
 class CButton extends Component {
     render() {
         return (
             <TouchableOpacity style={styles.button} onPress={this.props.onPress}>
-                <Text style={{color: 'white', textAlign: 'center'}}>{this.props.title}</Text>
+                <CText bold >{this.props.title}</CText>
             </TouchableOpacity>
         )
     }

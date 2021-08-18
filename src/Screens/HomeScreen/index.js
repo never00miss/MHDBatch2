@@ -23,9 +23,9 @@ export default class HomeScreen extends React.Component {
         {content.map((value, index)=>{
           return(
             <CButton 
+              onPress={()=>navigation.navigate(value.route)} 
               title={value.name.toUpperCase()} 
               key={index} 
-              onPress={()=>navigation.navigate(value.route)} 
             />
           )
         })}

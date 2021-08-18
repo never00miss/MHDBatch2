@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Platform, View, Text } from 'react-native';
+import { Platform, Text } from 'react-native';
 
 export default class CText extends React.Component {
   state = {
@@ -19,7 +19,6 @@ export default class CText extends React.Component {
   render() {
     const {
       style,
-      inline,
       bold
     } = this.props;
 
@@ -29,33 +28,25 @@ export default class CText extends React.Component {
 
     let _bold = bold ? isBold : {}
 
-    if (inline) {
-      return (
-        <Text {...this.props} style={{ ...styles.text, ...style, ..._bold }}  >{this.props.children}</Text>
-      );
-    }
-
     return (
-      <>
-        <Text {...this.props} style={{ ...styles.text, ...style, ..._bold }} >{this.props.children}</Text>
-      </>
+      <Text {...this.props} style={{ ...styles.text, ...style, ..._bold }} >{this.props.children}</Text>
     );
   }
 }
 
 const styles = {
   text: {
-    color: "#646464",
+    color: "white",
     fontStyle: "normal",
     ...Platform.select({
       ios: {
-        fontFamily: "Muli-Regular"
+        fontFamily: "Muli"
       },
       android: {
-        fontFamily: "Muli-Regular"
+        fontFamily: "Muli"
       },
       web: {
-        fontFamily: 'Muli-Regular'
+        fontFamily: 'Muli'
       }
     }),
     ...Platform.select({
