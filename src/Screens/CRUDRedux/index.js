@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Button, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import {connect} from 'react-redux';
 import MCI from 'react-native-vector-icons/MaterialCommunityIcons'
-import { addData, deleteData, updateData } from '../../redux/action';
+import { addData, deleteData, updateData } from './action';
 
 class CRUDRedux extends Component {
   constructor() {
@@ -64,12 +64,13 @@ class CRUDRedux extends Component {
 
   render() {
     const {id, nama, alamat, onEdit} = this.state
-    const { students } = this.props
+    const { students, rState, title } = this.props
+    console.log(rState)
     return (
       <View style={styles.container}>
         <ScrollView>
           <View style={styles.containerInput}>
-            <Text style={styles.title}>Tambah Data</Text>
+            <Text style={styles.title}>{title}</Text>
             <TextInput
               value={id}
               keyboardType="numeric"
@@ -103,7 +104,8 @@ class CRUDRedux extends Component {
               <Text style={styles.otherTitle}> Action </Text>
             </View>
             <ScrollView style={styles.containerTable}>
-              {students.map((value, index) => {
+              { students &&
+              students.map((value, index) => {
                 return (
                   <View key={index} style={styles.isi}>
                     <Text style={[styles.number, styles.data]}>
@@ -136,7 +138,9 @@ class CRUDRedux extends Component {
 
 const mapStateToProps = state => {
   return {
-    students: state.students
+    students: state.crudReducers.students,
+    rState: state,
+    title: state.crudReducers.title
   };
 };
 

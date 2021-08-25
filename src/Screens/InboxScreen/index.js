@@ -6,7 +6,7 @@ import {
   View,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { convertDateOnly, convertTimestamp } from '../../date'
+import { convertDateOnly, convertTimestamp } from '../../utils/date'
 
 class InboxScreen extends Component {
   constructor(){

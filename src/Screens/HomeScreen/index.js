@@ -11,7 +11,9 @@ export default class HomeScreen extends React.Component {
         {name: 'Inbox', route: 'Inbox'}, 
         {name: 'CRUD using Redux', route: 'CRUDRedux'},
         {name: 'CRUD State Local', route: 'CRUDLocal'},
-        {name: 'Chat', route: 'ListChat'}
+        {name: 'Chat', route: 'ListChat'},
+        {name: 'Redux Test', route: 'ReduxTest'},
+        {name: 'Review Materi', route: 'Review Materi'},
       ]
     }
   }

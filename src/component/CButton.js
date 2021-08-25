@@ -6,7 +6,7 @@ class CButton extends Component {
     render() {
         return (
             <TouchableOpacity style={styles.button} onPress={this.props.onPress}>
-                <CText bold >{this.props.title}</CText>
+                <CText style={{textAlign:'center'}} bold >{this.props.title}</CText>
             </TouchableOpacity>
         )
     }

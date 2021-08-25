@@ -9,6 +9,8 @@ import {
 import {colors} from '../../styles';
 import firestore from '@react-native-firebase/firestore';
 import CButton from '../../component/CButton';
+import { connect } from 'react-redux';
+import CText from '../../component/CText';
 
 class CRUDFirestore extends Component {
   constructor(){
@@ -21,7 +23,7 @@ class CRUDFirestore extends Component {
     }
   }
 
-  async componentDidMount(){
+  componentDidMount(){
     
     //One Time Read
     // const tampungan = await firestore().collection('Users').get()
@@ -32,14 +34,14 @@ class CRUDFirestore extends Component {
     // })
 
     //Realtime Changes
+    let tampungan
     firestore()
     .collection('Users')
     .onSnapshot((value)=>{
-      this.setState({
-        listRealtime: value.docs.map(result=>{
-          return result.data()
-        })
+      tampungan = value.docs.map(result=>{
+        return result.data()
       })
+      this.props.getUsers(tampungan)
     })
 
   }
@@ -50,27 +52,49 @@ class CRUDFirestore extends Component {
       nama: inputNama,
       alamat: inputAlamat
     })
+    this.setState({
+      inputNama: '',
+      inputAlamat: ''
+    })
   }
 
   render() {
     const { inputAlamat, inputNama, listRealtime } = this.state
+    const { users } = this.props
     return (
       <View style={styles.container}>
-        <View style={{paddingVertical: 10, width: '100%', alignItems: 'center'}}>
+        <View style={styles.section1}>
           <TextInput placeholder="Nama" style={styles.input} onChangeText={(e)=>this.setState({inputNama: e})} value={inputNama} />
           <TextInput placeholder="Alamat" style={styles.input} onChangeText={(e)=>this.setState({inputAlamat: e})} value={inputAlamat} />
           <CButton title="SUBMIT" onPress={this.submit} />
         </View>
-        <View style={{width: '100%', flex:1}}>
-          <ScrollView showsVerticalScrollIndicator={false}>
-            {listRealtime.map((value, index)=>{
-              return(
-                <View style={styles.list} key={index}>
-                  <Text>{value.nama}</Text>
-                  <Text>{value.alamat}</Text>
-                </View>
-              )
-            })}
+        <View style={styles.section2}>
+          <ScrollView style={{flex:1}} showsVerticalScrollIndicator={false}>
+            {users
+              ? users.map((value, index)=>{
+                  return(
+                    <View style={
+                      index%2==0 
+                      ? {
+                          ...styles.list, 
+                          borderLeftWidth: 10, 
+                          borderLeftColor: colors.secondary,
+                          backgroundColor: colors.yellow,   
+                        }
+                      : {
+                          ...styles.list, 
+                          borderRightWidth: 10, 
+                          borderRightColor: colors.yellow,
+                          backgroundColor: colors.secondary,
+                        }
+                    } key={index}>
+                      <CText bold>{value.nama}</CText>
+                      <CText>{value.alamat}</CText>
+                    </View>
+                  )
+                })
+              : <CText>No Data</CText>
+            }
           </ScrollView>
         </View>
       </View>
@@ -78,13 +102,26 @@ class CRUDFirestore extends Component {
   }
 }
 
-export default CRUDFirestore;
+const mapStateToProps = (state) => {
+  return {
+    users: state.firestoreReducers.stdFirestore
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getUsers: (data) => dispatch({ type: 'GET-USERS', payload: data })
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CRUDFirestore);
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: colors.primary
   },
   input: {
     backgroundColor: 'white',
@@ -107,13 +144,26 @@ const styles = StyleSheet.create({
   list: {
     width: '90%',
     backgroundColor: 'white',
-    borderRadius: 8,
+    borderRadius: 20,
     elevation: 8,
     flexDirection: 'row',
     alignItems: 'center',
     padding: 10,
     justifyContent: 'space-between',
     marginVertical: 5,
-    alignSelf: 'center'
+    alignSelf: 'center',
+  },
+  section1: {
+    paddingVertical: 10, 
+    alignItems: 'center', 
+    flex:1, 
+    justifyContent: 'center',
+    backgroundColor: colors.yellow,
+    width: '100%'
+  },
+  section2: {
+    flex:1, 
+    backgroundColor: colors.primary,
+    paddingVertical: 20
   }
 });

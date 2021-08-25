@@ -3,7 +3,6 @@ import {ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native
 import { TextInput } from 'react-native-gesture-handler';
 import MCI from 'react-native-vector-icons/MaterialCommunityIcons';
 import CBubbleText from '../../component/CBubbleText';
-import CChatHeader from '../../component/CChatHeader';
 import { convertDate } from '../../date';
 import { colors } from '../../styles';
 
@@ -35,8 +34,7 @@ class ChatScreen extends Component {
     const { nama, uid } = this.props.route.params
     const { messages, inputText } = this.state
     return (
-      <View style={styles.container}>
-        <CChatHeader name={nama} /> 
+      <View style={styles.container}>]
         <ScrollView style={{flex:1}}>
           {messages.map((value, index, array )=>{
             let countTime = index !=0 ? convertDate(array[index-1].date) : ''

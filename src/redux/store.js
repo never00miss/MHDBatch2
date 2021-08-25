@@ -7,7 +7,8 @@ import reducer from "./reducer"
 const persistConfig = {
     key: 'root',
     storage: AsyncStorage,
-    whitelist: ['students']
+    whitelist: ['students'],
+    blacklist: ['stdFirestore']
 }
 
 const persistedReducer = persistReducer(persistConfig, reducer)

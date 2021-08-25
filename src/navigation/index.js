@@ -13,6 +13,8 @@ import LoginScreen from '../Screens/LoginScreen';
 import CRUDLocal from '../Screens/CRUDLocal';
 import ListChat from '../Screens/ListChat';
 import ChatScreen from '../Screens/ChatScreen';
+import ReduxTest from '../Screens/ReduxTest';
+import ReviewMateri from '../Screens/ReviewMateri';
 
 const Stack = createStackNavigator();
 
@@ -32,6 +34,8 @@ class Navigation extends React.Component{
           <Stack.Screen name="CRUDLocal" component={CRUDLocal} />
           <Stack.Screen name="ListChat" component={ListChat} />
           <Stack.Screen name="Chat" component={ChatScreen} options={{headerShown: false}} />
+          <Stack.Screen name="ReduxTest" component={ReduxTest} />
+          <Stack.Screen name="Review Materi" component={ReviewMateri} options={{headerShown: false}} />
         </Stack.Navigator>
       </NavigationContainer>
     )
