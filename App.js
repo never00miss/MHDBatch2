@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Navigation from './src/navigation'
+import Navigation from './src/navigator'
 import { Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import messaging from '@react-native-firebase/messaging';
@@ -8,6 +8,8 @@ import { Provider } from 'react-redux';
 import { Store, Persistor } from './src/redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import NotifService from './NotifService';
+import auth from '@react-native-firebase/auth'
+import firestore from '@react-native-firebase/firestore'
 
 class App extends Component {
   constructor(props) {
@@ -21,6 +23,12 @@ class App extends Component {
   }
 
   async componentDidMount(){
+
+    const uid = await auth().currentUser.uid
+    if(uid){
+      firestore().collection('Users').doc(uid).update({isOnline: true})
+    }
+
     const jsonValue = await AsyncStorage.getItem('inbox')
     let inbox
     if(jsonValue != null){
@@ -52,6 +60,13 @@ class App extends Component {
         console.log(e)
       }
     })
+  }
+
+  async componentWillUnmount(){
+    const uid = await auth().currentUser.uid
+    if(uid){
+      firestore().collection('Users').doc(uid).update({isOnline: false})
+    }
   }
 
   render() {

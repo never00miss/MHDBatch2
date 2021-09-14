@@ -22,20 +22,20 @@ class LoginScreen extends Component {
 
   signIn = async () => {
     const { email, password } = this.state
-    await auth()
-    .signInWithEmailAndPassword(email, password)
-    .then(() => {
-      toastAndroidCenter('Login Success')
-      this.props.navigation.replace('Home')
-    })
-    .catch((error) => {
-      if (error.code === 'auth/user-not-found') {
-        toastAndroidCenter('User Not Found');
-      } else if (error.code === 'auth/wrong-password') {
-        toastAndroidCenter('Wrong Password!');
-      } else if (error.code === 'auth/invalid-email') {
-        toastAndroidCenter('Email address is invalid!');
-      }
+    auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        toastAndroidCenter('Login Success')
+        this.props.navigation.replace('Home')
+      })
+      .catch((error) => {
+        if (error.code === 'auth/user-not-found') {
+          toastAndroidCenter('User Not Found');
+        } else if (error.code === 'auth/wrong-password') {
+          toastAndroidCenter('Wrong Password!');
+        } else if (error.code === 'auth/invalid-email') {
+          toastAndroidCenter('Email address is invalid!');
+        }
     });
   }
 
@@ -52,6 +52,7 @@ class LoginScreen extends Component {
           iconName='key-variant' placeholder="Password" onChangeText={(e)=>this.setState({password: e})} password={true}
         />
         <CGap height={10} />
+        <CButton title='DAFTAR BARU' onPress={()=>this.props.navigation.navigate('Register')} />
         <CButton title='Login' onPress={this.signIn} />
       </View>
     );

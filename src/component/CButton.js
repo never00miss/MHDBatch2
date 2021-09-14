@@ -4,8 +4,9 @@ import CText from './CText'
 
 class CButton extends Component {
     render() {
+        const { style } = this.props
         return (
-            <TouchableOpacity style={styles.button} onPress={this.props.onPress}>
+            <TouchableOpacity style={{...styles.button, ...style}} onPress={this.props.onPress}>
                 <CText style={{textAlign:'center'}} bold >{this.props.title}</CText>
             </TouchableOpacity>
         )

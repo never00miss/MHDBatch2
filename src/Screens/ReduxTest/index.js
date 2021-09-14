@@ -31,6 +31,7 @@ class ReduxTest extends Component {
             if(user !== undefined){
                 if(user.password === inputPassword){
                     this.toast('Login Berhasil !!!')
+                    this.props.login(true)
                 } else {
                     this.toast('Password Salah')
                 }
@@ -38,6 +39,14 @@ class ReduxTest extends Component {
                 this.toast('User tidak ditemukan')
             }
         }
+    }
+
+    _checkAuth = () => {
+        this.toast(`${this.props.auth}`)
+    }
+
+    _logout = () => {
+        this.props.login(false)
     }
 
     render() {
@@ -48,6 +57,8 @@ class ReduxTest extends Component {
                 <TextInput style={styles.input} placeholder="Username" value={inputUsername} onChangeText={(typing)=>this.setState({inputUsername:typing})} />
                 <TextInput style={styles.input} placeholder="Password" value={inputPassword} onChangeText={(typing)=>this.setState({inputPassword:typing})} />
                 <CButton title="LOGIN" onPress={this._login} />
+                <CButton title="CHECK AUTH" onPress={this._checkAuth} />
+                <CButton title="LOGOUT" onPress={this._logout} />
             </View>
         )
     }
@@ -55,7 +66,8 @@ class ReduxTest extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        users: state.userReducers.users
+        users: state.userReducers.users,
+        auth: state.userReducers.isLogin,
     }
 }
 
@@ -63,6 +75,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         changeTitle: (data) => dispatch({
             type: "CHANGE-TITLE", payload: data
+        }),
+        login: (data) => dispatch({
+            type: "USER-LOGIN", payload: data
         })
     }
 }

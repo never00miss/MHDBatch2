@@ -5,15 +5,15 @@ import auth from '@react-native-firebase/auth';
 
 class SplashScreen extends Component {
     componentDidMount(){
-        setTimeout(() => {
-            auth().onAuthStateChanged((user) => {
+        auth().onAuthStateChanged((user) => {
+            setTimeout(() => {
                 if (user) {
                     this.props.navigation.replace('Home')
                 } else {
                     this.props.navigation.replace('Login')
                 }
-            });
-        }, 2500);
+            }, 2500);
+        });
     }
     render() {
         return (

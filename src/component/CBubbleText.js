@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import { colors } from '../styles'
-import { getHour } from '../date'
+import { getHour } from '../utils/date'
+import CText from '../component/CText'
 
 class CBubbleText extends Component {
   render() {
@@ -9,11 +10,13 @@ class CBubbleText extends Component {
     return (
       <View style={[
         styles.container, 
-        { alignSelf: isMe ? 'flex-start' : 'flex-end' },
-        { backgroundColor: isMe ? colors.primary : colors.yellow }
+        { 
+          alignSelf: isMe ? 'flex-end' : 'flex-start',
+          backgroundColor: isMe ? colors.blue : colors.secondary
+        }
       ]}>
-        <Text>{text}</Text>
-        <Text style={styles.time}>{getHour(time)}</Text>
+        <CText>{text}</CText>
+        <CText style={styles.time}>{getHour(time)}</CText>
       </View>
     );
   }
@@ -26,10 +29,11 @@ const styles = StyleSheet.create({
     padding: 10,
     elevation: 4,
     margin: 6,
-    borderRadius: 8
+    borderRadius: 8,
+    maxWidth: '80%'
   },
   time: {
-    fontSize: 11,
+    fontSize: 10,
     textAlign: 'right',
     marginTop: 3
   }

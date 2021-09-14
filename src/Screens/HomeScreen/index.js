@@ -1,7 +1,11 @@
 import * as React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Text} from 'react-native';
 import CButton from '../../component/CButton';
-export default class HomeScreen extends React.Component {
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore'
+import { connect } from 'react-redux';
+import Axios from 'axios'
+class HomeScreen extends React.Component {
   constructor(){
     super()
     this.state={
@@ -14,12 +18,34 @@ export default class HomeScreen extends React.Component {
         {name: 'Chat', route: 'ListChat'},
         {name: 'Redux Test', route: 'ReduxTest'},
         {name: 'Review Materi', route: 'Review Materi'},
+        {name: 'Learning API', route: 'APILearning'},
       ]
     }
   }
+
+  async componentDidMount(){
+    const getUid = await auth().currentUser.uid
+    firestore()
+      .collection('Users')
+      .doc(getUid)
+      .onSnapshot(ress=>{
+        this.props.setUser(ress.data())
+      })
+  }
+
+  _signOut = () => {
+    auth()
+      .signOut()
+      .then(async() => {
+          await this.props.setUser({})
+          this.props.navigation.replace('Login')
+        }
+      );
+  }
+
   render() {
     const { content } = this.state
-    const { navigation } = this.props
+    const { navigation, user } = this.props
     return (
       <View style={styles.container}>
         {content.map((value, index)=>{
@@ -31,10 +57,29 @@ export default class HomeScreen extends React.Component {
             />
           )
         })}
+        <Text>{JSON.stringify(user)}</Text>
+        <CButton title="LOGOUT" onPress={()=>this._signOut()} />
       </View>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    user: state.dashboardReducers.user
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setUser: data => dispatch({
+      type: 'USER-DATA',
+      payload: data
+    })
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen)
 
 const styles = StyleSheet.create({
   container: {
