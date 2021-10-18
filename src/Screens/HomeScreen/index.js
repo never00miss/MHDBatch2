@@ -5,6 +5,7 @@ import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore'
 import { connect } from 'react-redux';
 import Axios from 'axios'
+import { convertDate } from '../../utils/date'
 class HomeScreen extends React.Component {
   constructor(){
     super()

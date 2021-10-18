@@ -9,35 +9,30 @@ class ListChat extends Component {
   constructor(){
     super()
     this.state = {
-      Users: []
+      messages: []
     }
   }
 
   async componentDidMount(){
     Firestore()
       .collection('Users')
-      .where('uid', '!=', this.props.user.uid)
-      .onSnapshot((value)=>{
-        this.setState({
-          Users: value.docs.map(result=>{
-            return result.data()
-          })
-        })
-      })
+      .doc(this.props.user.uid)
+	  .collection('chatWith')
+	  .onSnapshot(raes=>console.log(raes))
   }
 
   render() {
-    const { Users } = this.state
+    const { messages } = this.state
     return (
       <View>
-        {Users.map((value, index)=>{
-          console.log(value)
+		  <Text>asdasd</Text>
+        {/* {messages.map((value, index)=>{
           return(
             <TouchableOpacity key={index} onPress={()=>this.props.navigation.navigate('Chat', value)} style={styles.list}>
               <CText style={{color:'black'}}>{value.nama.toUpperCase()}</CText>
             </TouchableOpacity>
           )
-        })}
+        })} */}
       </View>
     );
   }

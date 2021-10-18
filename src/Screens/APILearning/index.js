@@ -36,7 +36,7 @@ class APILearning extends Component {
     const data = {
       name
     }
-    axios.patch(`http://10.0.2.2:3004/users/${id}`, data)
+    axios.patch(`http://10.0.2.2:3000/users/${id}`, data)
     .then(()=>{
       this.setState({
         id: '',
@@ -50,7 +50,7 @@ class APILearning extends Component {
 
   _getDataFromLocalDB = async () => {
     // Call API menggunakan AXIOS
-    const users = await axios.get('http://10.0.2.2:3004/users');
+    const users = await axios.get('http://10.0.2.2:3000/users');
     this.setState({
       users: users.data,
     });
@@ -62,7 +62,7 @@ class APILearning extends Component {
       name: name,
       email: email
     }
-    axios.post('http://10.0.2.2:3004/users', data)
+    axios.post('http://10.0.2.2:3000/users', data)
     .then(()=>{
       this.setState({
         name: '',
@@ -74,7 +74,7 @@ class APILearning extends Component {
   }
 
   _deleteLocalDB = (id) => {
-    axios.delete(`http://10.0.2.2:3004/users/${id}`)
+    axios.delete(`http://10.0.2.2:3000/users/${id}`)
     .then((ress)=>{
       console.log(ress)
       this._getDataFromLocalDB()

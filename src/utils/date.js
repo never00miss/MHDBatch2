@@ -5,9 +5,8 @@ export const convertDate = (date) => {
     let tanggal = date.getDate();
     let _hari = hari[date.getDay()];
     let _bulan = bulan[date.getMonth()]; 
-    let _tahun = date.getYear();
-    let tahun = (_tahun < 1000) ? _tahun + 1900 : _tahun;
-    return `${_hari}, ${tanggal} ${_bulan} ${tahun}` 
+    let _tahun = date.getFullYear()
+    return `${_hari}, ${tanggal} ${_bulan} ${_tahun}` 
 }
 
 function addZero(i) {
@@ -21,9 +20,8 @@ export const convertTime = (date) => {
     let tanggal = date.getDate();
     let _hari = hari[date.getDay()];
     let _bulan = bulan[date.getMonth()]; 
-    let _tahun = date.getYear();
-    let tahun = (_tahun < 1000) ? _tahun + 1900 : _tahun;
-    return `${_hari}, ${tanggal} ${_bulan} ${tahun} / ${getHour(date)}` 
+    let _tahun = date.getFullYear();
+    return `${_hari}, ${tanggal} ${_bulan} ${_tahun} / ${getHour(date)}` 
 }
 
 export const getHour = (date) => {
@@ -90,4 +88,3 @@ export const getUniqueCode = (oldDate, idMix) => {
 
     return `${date}${month}${String(year).substr(2)}${hour}${minute}${idMix}`;
 };
-  

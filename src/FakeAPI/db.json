@@ -6,11 +6,6 @@
       "id": 1
     },
     {
-      "name": "Bambang",
-      "email": "Bambang@gmail.com",
-      "id": 3
-    },
-    {
       "id": 4,
       "name": "Karyo",
       "email": "Karyo@gmail.com"
@@ -24,6 +19,16 @@
       "name": "Firhan",
       "id": 6,
       "email": "firhan@gmail.com"
+    },
+    {
+      "name": "Kasno",
+      "email": "kasno@gmail.com",
+      "id": 7
+    },
+    {
+      "name": "Dio",
+      "email": "dio@gmail.com",
+      "id": 8
     }
   ]
 }

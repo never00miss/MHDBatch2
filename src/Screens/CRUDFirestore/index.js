@@ -19,7 +19,9 @@ class CRUDFirestore extends Component {
       listRealtime: [],
       // listOneTime: [],
       inputNama: '',
-      inputAlamat: ''
+      inputAlamat: '',
+      filtered: [],
+      searchIn: '',
     }
   }
 
@@ -58,19 +60,60 @@ class CRUDFirestore extends Component {
     })
   }
 
+  _search = (e) => {
+    this.setState((state, props) => {
+        return {
+          searchIn: e,
+          filtered: props.users.filter( value => {
+            if(
+              value.nama.toLowerCase().includes(e.toLowerCase()) 
+              ||  value.alamat.toLowerCase().includes(e.toLowerCase())
+            ){
+              return value
+            }
+          })
+        };
+      }
+    )
+  }
+
   render() {
-    const { inputAlamat, inputNama, listRealtime } = this.state
+    const { inputAlamat, inputNama, listRealtime, searchIn, filtered } = this.state
     const { users } = this.props
     return (
       <View style={styles.container}>
         <View style={styles.section1}>
-          <TextInput placeholder="Nama" style={styles.input} onChangeText={(e)=>this.setState({inputNama: e})} value={inputNama} />
+          <TextInput placeholder="Search" style={styles.input} onChangeText={(e)=>this._search(e)} value={searchIn} />
+          {/* <TextInput placeholder="Nama" style={styles.input} onChangeText={(e)=>this.setState({inputNama: e})} value={inputNama} />
           <TextInput placeholder="Alamat" style={styles.input} onChangeText={(e)=>this.setState({inputAlamat: e})} value={inputAlamat} />
-          <CButton title="SUBMIT" onPress={this.submit} />
+          <CButton title="SUBMIT" onPress={this._search} /> */}
         </View>
         <View style={styles.section2}>
           <ScrollView style={{flex:1}} showsVerticalScrollIndicator={false}>
-            {users
+            { searchIn.length > 0
+            ? filtered.map((value, index)=>{
+                return(
+                  <View style={
+                    index%2==0 
+                    ? {
+                        ...styles.list, 
+                        borderLeftWidth: 10, 
+                        borderLeftColor: colors.secondary,
+                        backgroundColor: colors.yellow,   
+                      }
+                    : {
+                        ...styles.list, 
+                        borderRightWidth: 10, 
+                        borderRightColor: colors.yellow,
+                        backgroundColor: colors.secondary,
+                      }
+                  } key={index}>
+                    <CText bold>{value.nama}</CText>
+                    <CText>{value.alamat}</CText>
+                  </View>
+                )
+              })
+            : users
               ? users.map((value, index)=>{
                   return(
                     <View style={

@@ -87,7 +87,7 @@ class ChatScreen extends Component {
         <CHeader target={target} />
         <ScrollView style={{flex:1}}>
           { messages
-            ? messages.map((value, index, array )=>{
+            ? messages.map(( value, index, array )=>{
                 let countTime = index !=0 ? convertDate(array[index-1].date.toDate()) : ''
                 return(
                   <View key={index}>
